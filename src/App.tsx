@@ -5,11 +5,10 @@ function App() {
   const [result, setResult] = useState("");
 
   function requestData() {
-    const apiUrl = "http://136.244.66.213:1200/api/chart";
+    const apiUrl = "https://136.244.66.213:1200/api/chart";
     fetch(apiUrl, {
       method: "POST",
       body: JSON.stringify({
-        OPENAI_API_KEY: "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",
         content: apiData,
       }),
     })
@@ -29,9 +28,9 @@ function App() {
         type="text"
         value={apiData}
         onChange={(e) => setApiData(e.target.value)}
-        placeholder="请输入要请求的数据"
+        placeholder="请输入你要问的话"
       />
-      <button onClick={requestData}>请求数据</button>
+      <button onClick={requestData}>发送</button>
 
       <div id="result" dangerouslySetInnerHTML={{ __html: result }}></div>
     </div>
