@@ -5,10 +5,14 @@ function App() {
   const [result, setResult] = useState("");
 
   function requestData() {
-    const apiUrl = "http://136.244.66.213:1200/api/chart"; // 将API URL替换为您自己的API URL
-    fetch(
-      `http://136.244.66.213:1200/api/chart?content=${apiData}&OPENAI_API_KEY=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`
-    )
+    const apiUrl = "http://136.244.66.213:1200/api/chart";
+    fetch(apiUrl, {
+      method: "POST",
+      body: JSON.stringify({
+        OPENAI_API_KEY: "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",
+        content: apiData,
+      }),
+    })
       .then((res) => res.json())
       .then(function (response) {
         setResult(response.content);
