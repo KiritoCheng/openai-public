@@ -1,0 +1,122 @@
+.search-container {
+  background-color: #fff;
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+  border-color: rgba(223, 225, 229, 0);
+  display: flex;
+  height: 44px;
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  width: 584px;
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 999;
+}
+
+.input-left {
+  display: flex;
+  align-items: center;
+  padding-right: 13px;
+  margin-top: -5px;
+}
+.input-right {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: stretch;
+  flex-direction: row;
+  padding-left: 4px;
+}
+.input-right .btn {
+  flex: 1 0 auto;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  outline: none;
+  padding: 0 8px;
+  width: 24px;
+  line-height: 44px;
+  color: #9aa0a6;
+}
+
+.input-box {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.input-box input {
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.87);
+  word-wrap: break-word;
+  outline: none;
+  display: flex;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 16px;
+  flex: 100%;
+  font-family: arial, sans-serif;
+}
+
+.result-container {
+  margin: 0 auto;
+  width: 768px;
+  margin-bottom: 20px;
+}
+
+.ai-container,
+.question-container {
+  border-radius: 8px;
+  padding: 12px;
+  word-break: break-all;
+  display: flex;
+}
+.ai-container {
+  background-color: rgba(247, 247, 248, 1);
+}
+.avater {
+  flex-basis: 42px;
+}
+.result {
+  flex: 1;
+}
+
+.waiting-text span {
+  display: inline-block;
+  margin-left: 5px;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: black;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: waiting-animation;
+  animation-iteration-count: infinite;
+}
+
+@keyframes waiting-animation {
+  0% {
+    opacity: 0.2;
+    transform: scale(0);
+  }
+  25% {
+    opacity: 0.4;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  75% {
+    opacity: 0.8;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(0);
+  }
+}
