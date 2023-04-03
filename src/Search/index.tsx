@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiAvater } from "../Icons/AiAvater";
 import { UserAvater } from "../Icons/UserAvater";
 import "./index.css";
+import Prism from "prismjs";
+import "prism-themes/themes/prism-one-light.css";
 
 // %z3Y7HZ}z_#ARvLh
 function Search() {
   const [apiData, setApiData] = useState("");
   const [resultList, setResult] = useState([] as any);
   const [qaList, setQa] = useState([] as any);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [resultList]);
 
   function requestData() {
+    if (loading === true) return;
+    if (!(apiData && apiData !== "")) return;
     setApiData("");
+    setLoading(true);
     setQa([...qaList, apiData]);
+
     const apiUrl = "https://kiritosa.com:1200/api/chart";
     fetch(apiUrl + `?content=${apiData}`)
       .then((res) => res.json())
@@ -25,6 +36,9 @@ function Search() {
       .catch(function (error) {
         console.log(error);
         setResult([...resultList, "请求出错！"]);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 
@@ -46,10 +60,10 @@ function Search() {
             <svg
               stroke="currentColor"
               fill="none"
-              stroke-width="2"
+              strokeWidth="2"
               viewBox="0 0 24 24"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               height="20px"
               width="20px"
               xmlns="http://www.w3.org/2000/svg"
@@ -61,35 +75,39 @@ function Search() {
         </div>
       </div>
 
-      {qaList.length > 0 &&
-        qaList.map((item: any, index: any) => {
-          const res = resultList[index];
-          return (
-            <div className="result-container">
-              <div className="question-container">
-                <div className="avater">
-                  <UserAvater />
-                </div>
-                <div className="result">{item}</div>
-              </div>
-
-              <div className="ai-container">
-                <div className="avater">
-                  <AiAvater />
-                </div>
-                {res ? (
-                  <div className="result typewriter">{resultList[index]}</div>
-                ) : (
-                  <div className="waiting-text">
-                    Thinking<span></span>
-                    <span></span>
-                    <span></span>
+      <div style={{ paddingBottom: 200 }}>
+        {qaList.length > 0 &&
+          qaList.map((item: any, index: any) => {
+            return (
+              <div className="result-container" key={index}>
+                <div className="question-container">
+                  <div className="avater">
+                    <UserAvater />
                   </div>
-                )}
+                  <div className="result">{item}</div>
+                </div>
+
+                <div className="ai-container">
+                  <div className="avater">
+                    <AiAvater />
+                  </div>
+                  {loading ? (
+                    <div>
+                      Please wait&nbsp;
+                      <span className="waiting-dots">
+                        <span>.</span>
+                        <span>.</span>
+                        <span>.</span>
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="result typewriter">{resultList[index]}</div>
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+      </div>
     </div>
   );
 }
