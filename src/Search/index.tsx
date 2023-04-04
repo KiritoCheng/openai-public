@@ -78,6 +78,7 @@ function Search() {
       <div style={{ paddingBottom: 200 }}>
         {qaList.length > 0 &&
           qaList.map((item: any, index: any) => {
+            const reslut = resultList[index] || null;
             return (
               <div className="result-container" key={index}>
                 <div className="question-container">
@@ -91,7 +92,9 @@ function Search() {
                   <div className="avater">
                     <AiAvater />
                   </div>
-                  {loading ? (
+                  {reslut ? (
+                    <div className="result typewriter">{reslut}</div>
+                  ) : (
                     <div>
                       Please wait&nbsp;
                       <span className="waiting-dots">
@@ -100,8 +103,6 @@ function Search() {
                         <span>.</span>
                       </span>
                     </div>
-                  ) : (
-                    <div className="result typewriter">{resultList[index]}</div>
                   )}
                 </div>
               </div>

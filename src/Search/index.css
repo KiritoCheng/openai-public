@@ -1,6 +1,8 @@
-code {
-  color: #cb3837;
-  margin: 0 6px;
+@media screen and (max-width: 300px) {
+  code {
+    color: #cb3837;
+    margin: 0 6px;
+  }
 }
 
 .search-container {
