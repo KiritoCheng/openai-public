@@ -1,7 +1,42 @@
-@media screen and (max-width: 300px) {
-  code {
-    color: #cb3837;
-    margin: 0 6px;
+code {
+  color: #cb3837;
+  margin: 0 6px;
+}
+
+.container {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .search-container {
+    width: 90%;
+    top: 60px;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  .result-container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .back-container {
+    padding: 24px;
+    padding-top: 120px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .search-container {
+    width: 584px;
+    bottom: 60px;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  .result-container {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 768px;
+  }
+  .back-container {
+    padding-bottom: 200px;
   }
 }
 
@@ -13,11 +48,7 @@
   height: 44px;
   border: 1px solid #dfe1e5;
   border-radius: 24px;
-  width: 584px;
   position: fixed;
-  bottom: 60px;
-  left: 50%;
-  transform: translate(-50%, 0);
   z-index: 999;
 }
 
@@ -69,12 +100,6 @@
   font-family: arial, sans-serif;
 }
 
-.result-container {
-  margin: 0 auto;
-  width: 768px;
-  margin-bottom: 20px;
-}
-
 .ai-container,
 .question-container {
   border-radius: 8px;
@@ -91,32 +116,6 @@
 .result {
   flex: 1;
 }
-
-.waiting-dots {
-  display: inline-block;
-  font-size: 24px;
-}
-
-.waiting-dots span {
-  animation: blink 1.5s infinite;
-  opacity: 0;
-  animation-delay: 0s;
-  display: inline-block;
-}
-
-.waiting-dots span:nth-child(2) {
-  animation-delay: 0.5s;
-}
-
-.waiting-dots span:nth-child(3) {
-  animation-delay: 1s;
-}
-
-@keyframes blink {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.result > div > p:first-child {
+  margin: 0;
 }

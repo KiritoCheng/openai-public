@@ -4,9 +4,11 @@ import { UserAvater } from "../Icons/UserAvater";
 import "./index.css";
 import Prism from "prismjs";
 import "prism-themes/themes/prism-one-light.css";
+import { SendIcon } from "../Icons/Send";
+import { Loading } from "../Loading";
+import { Evoil } from "../Evoil";
 
-// %z3Y7HZ}z_#ARvLh
-function Search() {
+const Search = () => {
   const [apiData, setApiData] = useState("");
   const [resultList, setResult] = useState([] as any);
   const [qaList, setQa] = useState([] as any);
@@ -16,9 +18,10 @@ function Search() {
     Prism.highlightAll();
   }, [resultList]);
 
-  function requestData() {
+  const requestData = () => {
     if (loading === true) return;
     if (!(apiData && apiData !== "")) return;
+
     setApiData("");
     setLoading(true);
     setQa([...qaList, apiData]);
@@ -40,10 +43,10 @@ function Search() {
       .finally(() => {
         setLoading(false);
       });
-  }
+  };
 
   return (
-    <div>
+    <div className="container">
       <div className="search-container">
         <div className="input-left"></div>
         <div className="input-box">
@@ -51,34 +54,29 @@ function Search() {
             type="text"
             placeholder="Ask something..."
             value={apiData}
-            onChange={(e) => setApiData(e.target.value)}
+            onChange={(e: any) => {
+              setApiData(e.target.value);
+            }}
+            onKeyDown={(e: any) => {
+              if (e.key === "Enter") {
+                // 处理用户按下回车键的操作
+                requestData();
+              }
+            }}
           />
         </div>
 
         <div className="input-right" onClick={requestData}>
           <div className="btn">
-            <svg
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              height="20px"
-              width="20px"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <line x1="22" y1="2" x2="11" y2="13"></line>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>
+            <SendIcon />
           </div>
         </div>
       </div>
 
-      <div style={{ paddingBottom: 200 }}>
+      <div className="back-container">
         {qaList.length > 0 &&
           qaList.map((item: any, index: any) => {
-            const reslut = resultList[index] || null;
+            const res = resultList[index];
             return (
               <div className="result-container" key={index}>
                 <div className="question-container">
@@ -92,25 +90,19 @@ function Search() {
                   <div className="avater">
                     <AiAvater />
                   </div>
-                  {reslut ? (
-                    <div className="result typewriter">{reslut}</div>
+                  {res ? (
+                    <div className="result typewriter">{res}</div>
                   ) : (
-                    <div>
-                      Please wait&nbsp;
-                      <span className="waiting-dots">
-                        <span>.</span>
-                        <span>.</span>
-                        <span>.</span>
-                      </span>
-                    </div>
+                    <Loading />
                   )}
                 </div>
               </div>
             );
           })}
+        <Evoil />
       </div>
     </div>
   );
-}
+};
 
 export default Search;
